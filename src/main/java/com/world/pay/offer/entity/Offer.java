@@ -3,25 +3,43 @@ package com.world.pay.offer.entity;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "OFFER")
 public class Offer{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int offerId;
+	@Column(name = "OFFER_ID")
+	private Integer offerId;
+	@Column(name = "OFFER_START_DATE")
 	private Date offerStartDate;
+	@Column(name = "OFFER_END_DATE")
 	private Date offerEndDate;
+	@Column(name = "STATUS")
 	private int status;
+	@Column(name = "CREATE_TS")
 	private Timestamp createTs;
-	public int getOfferId() {
+	
+	@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, 
+			fetch = FetchType.LAZY)
+	@JoinColumn(name = "OFFER_ID")
+	private OfferDetails offerDetails;
+	
+	public Integer getOfferId() {
 		return offerId;
 	}
-	public void setOfferId(int offerId) {
+	public void setOfferId(Integer offerId) {
 		this.offerId = offerId;
 	}
 	public Date getOfferStartDate() {
@@ -48,7 +66,12 @@ public class Offer{
 	public void setCreateTs(Timestamp createTs) {
 		this.createTs = createTs;
 	}
-	
+	public OfferDetails getOfferDetails() {
+		return offerDetails;
+	}
+	public void setOfferDetails(OfferDetails offerDetails) {
+		this.offerDetails = offerDetails;
+	}
 	@Override
 	public String toString() {
 		return "Offer [offerId=" + offerId + ", offerStartDate=" + offerStartDate + ", offerEndDate=" + offerEndDate

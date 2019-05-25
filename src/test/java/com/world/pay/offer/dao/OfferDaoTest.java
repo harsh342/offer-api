@@ -104,7 +104,7 @@ public class OfferDaoTest {
 		
 		Optional<Offer> offReturn = offerDao.getOfferDetails(1);
 		
-		Assert.assertEquals(1, offReturn.get().getOfferId());
+		Assert.assertEquals(new Integer(1), offReturn.get().getOfferId());
 		
 	}
 	
