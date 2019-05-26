@@ -1,5 +1,10 @@
 package com.world.pay.offer.bean;
 
+import java.util.Arrays;
+import java.util.Optional;
+
+import com.world.pay.offer.exception.OfferDataException;
+
 public enum Merchants {
 	
 	MERCHANT_1("MERCHANT_1",1)
@@ -26,6 +31,24 @@ public enum Merchants {
 		this.merchantId = merchantId;
 	}
 	
+	/**
+	 * Method Compares the merchant name in the request and returns the merchant id
+	 * @param merchantName
+	 * @return
+	 * @throws OfferDataException
+	 */
+	public static Integer getMerchantId(final String merchantName) throws OfferDataException {
+		
+		Optional<Merchants> merchant = 
+				Arrays.stream(Merchants.values()).
+					filter((p)->p.getMerchantName().equals(merchantName)).findAny();
+		
+		if(merchant.isPresent()) {
+			return merchant.get().getMerchantId();
+		}else {
+			throw new OfferDataException("Merchant Name Not Registered");
+		}
+	}
 	
 	
 

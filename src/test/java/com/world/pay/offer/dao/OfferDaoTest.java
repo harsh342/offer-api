@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.world.pay.offer.bean.Offers;
 import com.world.pay.offer.entity.Offer;
 import com.world.pay.offer.exception.NoOfferDataFoundException;
 import com.world.pay.offer.repository.OfferRepository;
@@ -146,7 +147,7 @@ public class OfferDaoTest {
 		offer.setOfferStartDate(Date.valueOf(LocalDateTime.now().atZone(ZoneId.of("Z")).toLocalDate()));
 		offer.setOfferEndDate(Date.valueOf(LocalDateTime.now().plusDays(1).atZone(ZoneId.of("Z")).toLocalDate()));
 		offer.setCreateTs(Timestamp.from(LocalDateTime.now().atZone(ZoneId.of("Z")).toInstant()));
-		offer.setStatus(1);
+		offer.setStatus(Offers.ACTIVE.getValue());
 		
 		PowerMockito.when(offerRepository.save(offer)).thenReturn(offer);
 		

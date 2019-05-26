@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Offer{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "OFFER_ID")
 	private Integer offerId;
 	@Column(name = "OFFER_START_DATE")
@@ -27,7 +27,7 @@ public class Offer{
 	@Column(name = "OFFER_END_DATE")
 	private Date offerEndDate;
 	@Column(name = "STATUS")
-	private int status;
+	private String status;
 	@Column(name = "CREATE_TS")
 	private Timestamp createTs;
 	
@@ -54,10 +54,11 @@ public class Offer{
 	public void setOfferEndDate(Date offerEndDate) {
 		this.offerEndDate = offerEndDate;
 	}
-	public int getStatus() {
+	
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public Timestamp getCreateTs() {

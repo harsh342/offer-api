@@ -4,6 +4,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -13,10 +15,11 @@ import javax.persistence.Table;
 public class OfferDetails {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "OFFER_ID")
 	private Integer offerId;
 	@Column(name = "MERCHANT_ID")
-	private String merchantId;
+	private Integer merchantId;
 	@Column(name = "OFFER_DESCRIPTION")
 	private String offerDescription;
 	@Column(name = "OFFER_CURRENCY")
@@ -37,11 +40,11 @@ public class OfferDetails {
 		this.offerId = offerId;
 	}
 
-	public String getMerchantId() {
+	public Integer getMerchantId() {
 		return merchantId;
 	}
 
-	public void setMerchantId(String merchantId) {
+	public void setMerchantId(Integer merchantId) {
 		this.merchantId = merchantId;
 	}
 

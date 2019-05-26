@@ -1,6 +1,6 @@
 package com.world.pay.offer.bean;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CreateOfferRequest {
 	
@@ -8,8 +8,8 @@ public class CreateOfferRequest {
 	private String offerCurrency;
 	private String offerType;
 	private String merchantName;
-	private Date offerStartDate;
-	private Date offerEndDate;
+	private LocalDate offerStartDate;
+	private LocalDate offerEndDate;
 	public String getOfferDescription() {
 		return offerDescription;
 	}
@@ -34,16 +34,16 @@ public class CreateOfferRequest {
 	public void setMerchantName(String merchantName) {
 		this.merchantName = merchantName;
 	}
-	public Date getOfferStartDate() {
+	public LocalDate getOfferStartDate() {
 		return offerStartDate;
 	}
-	public void setOfferStartDate(Date offerStartDate) {
+	public void setOfferStartDate(LocalDate offerStartDate) {
 		this.offerStartDate = offerStartDate;
 	}
-	public Date getOfferEndDate() {
+	public LocalDate getOfferEndDate() {
 		return offerEndDate;
 	}
-	public void setOfferEndDate(Date offerEndDate) {
+	public void setOfferEndDate(LocalDate offerEndDate) {
 		this.offerEndDate = offerEndDate;
 	}
 	
