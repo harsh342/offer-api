@@ -1,8 +1,6 @@
 package com.world.pay.offer.exception;
 
-import javax.persistence.NoResultException;
-
-public class NoOfferDataFoundException extends NoResultException {
+public class NoOfferDataFoundException extends RuntimeException {
 
 	/**
 	 * 
@@ -13,6 +11,10 @@ public class NoOfferDataFoundException extends NoResultException {
 		super(message);
 	}
 
+	public NoOfferDataFoundException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	
 	
 
 }

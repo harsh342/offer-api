@@ -37,17 +37,11 @@ public enum Merchants {
 	 * @return
 	 * @throws OfferDataException
 	 */
-	public static Integer getMerchantId(final String merchantName) throws OfferDataException {
+	public static Optional<Merchants> getMerchantId(final String merchantName) throws OfferDataException {
 		
-		Optional<Merchants> merchant = 
-				Arrays.stream(Merchants.values()).
-					filter((p)->p.getMerchantName().equals(merchantName)).findAny();
+		return Arrays.stream(Merchants.values()).
+					filter(p->p.getMerchantName().equals(merchantName)).findAny();
 		
-		if(merchant.isPresent()) {
-			return merchant.get().getMerchantId();
-		}else {
-			throw new OfferDataException("Merchant Name Not Registered");
-		}
 	}
 	
 	

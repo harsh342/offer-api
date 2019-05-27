@@ -1,5 +1,6 @@
 package com.world.pay.offer.bean;
 
+
 public class ResponseStatus {
 	
 	private String responseMessage;

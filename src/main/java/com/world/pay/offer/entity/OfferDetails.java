@@ -1,5 +1,7 @@
 package com.world.pay.offer.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +28,9 @@ public class OfferDetails {
 	private String offerCurrency;
 	@Column(name = "OFFER_TYPE")
 	private String offerType;
-
+	@Column(name = "OFFER_AMOUNT")
+	private BigDecimal offerAmount;
+	
 	@OneToOne(mappedBy = "offerDetails",
 			fetch = FetchType.LAZY, 
 			cascade = {CascadeType.PERSIST,CascadeType.MERGE})
@@ -79,7 +83,13 @@ public class OfferDetails {
 	public void setOffer(Offer offer) {
 		this.offer = offer;
 	}
-	
-	
+
+	public BigDecimal getOfferAmount() {
+		return offerAmount;
+	}
+
+	public void setOfferAmount(BigDecimal offerAmount) {
+		this.offerAmount = offerAmount;
+	}
 
 }

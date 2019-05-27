@@ -1,7 +1,12 @@
 package com.world.pay.offer.bean;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class CreateOfferResponse extends ResponseStatus{
 
 	private Integer offerId;
@@ -9,9 +14,11 @@ public class CreateOfferResponse extends ResponseStatus{
 	private String offerCurrency;
 	private String offerType;
 	private String merchantName;
-	private Date offerStartDate;
-	private Date offerEndDate;
-	private int status;
+	private LocalDate offerStartDate;
+	private LocalDate offerEndDate;
+	private String status;
+	private BigDecimal offerAmount;
+	
 	public Integer getOfferId() {
 		return offerId;
 	}
@@ -42,23 +49,29 @@ public class CreateOfferResponse extends ResponseStatus{
 	public void setMerchantName(String merchantName) {
 		this.merchantName = merchantName;
 	}
-	public Date getOfferStartDate() {
+	public LocalDate getOfferStartDate() {
 		return offerStartDate;
 	}
-	public void setOfferStartDate(Date offerStartDate) {
+	public void setOfferStartDate(LocalDate offerStartDate) {
 		this.offerStartDate = offerStartDate;
 	}
-	public Date getOfferEndDate() {
+	public LocalDate getOfferEndDate() {
 		return offerEndDate;
 	}
-	public void setOfferEndDate(Date offerEndDate) {
+	public void setOfferEndDate(LocalDate offerEndDate) {
 		this.offerEndDate = offerEndDate;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
+	}
+	public BigDecimal getOfferAmount() {
+		return offerAmount;
+	}
+	public void setOfferAmount(BigDecimal offerAmount) {
+		this.offerAmount = offerAmount;
 	}
 	
 	
