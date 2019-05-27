@@ -3,6 +3,7 @@ package com.world.pay.offer.helper;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.BeanUtils;
@@ -58,7 +59,10 @@ public class OfferHelper {
 	 */
 	public void validateRequest(final CreateOfferRequest createOfferRequest){
 
-		if (createOfferRequest.getOfferStartDate().isAfter(createOfferRequest.getOfferEndDate())) {
+		if (createOfferRequest.getOfferStartDate().isBefore(LocalDate.now()) ||
+				createOfferRequest.getOfferEndDate().isBefore(LocalDate.now())) {
+			throw new OfferDataException("Offer Start or End Dates can not be past dates.");
+		} else if (createOfferRequest.getOfferStartDate().isAfter(createOfferRequest.getOfferEndDate())) {
 			throw new OfferDataException("Offer Start Date is After Offer End Date.");
 		} else if (!OfferTypes.getOfferTy(createOfferRequest.getOfferType().toUpperCase()).isPresent()) {
 			throw new OfferDataException("Incorrect Offer Type.");

@@ -55,7 +55,7 @@ public class OfferHelperTest {
 	 */
 	
 	@Test
-	public void testCreateOfferEntity_un_registered_merchant() throws OfferDataException {
+	public void testValidateRequest_un_registered_merchant() throws OfferDataException {
 		
 		thrown.expect(OfferDataException.class);
 		thrown.expectMessage("Merchant is not registered.");
@@ -80,7 +80,7 @@ public class OfferHelperTest {
 	 */
 	
 	@Test
-	public void testCreateOfferEntity_incorrect_offer_type() throws OfferDataException {
+	public void testValidateRequest_incorrect_offer_type() throws OfferDataException {
 		
 		thrown.expect(OfferDataException.class);
 		thrown.expectMessage("Incorrect Offer Type.");
@@ -104,7 +104,7 @@ public class OfferHelperTest {
 	 */
 	
 	@Test
-	public void testCreateOfferEntity_incorrect_currency() throws OfferDataException {
+	public void testValidateRequest_incorrect_currency() throws OfferDataException {
 		
 		thrown.expect(OfferDataException.class);
 		thrown.expectMessage("Incorrect Offer Currency.");
@@ -122,13 +122,36 @@ public class OfferHelperTest {
 	}
 	
 	/**
+	 * Offer start or end dates can not be past dates
+	 * throw OfferDataException
+	 * 
+	 * Message: Offer Start or End Dates can not be past dates.
+	 */
+	@Test
+	public void testValidateRequest_from_to_date_past_date() {
+		thrown.expect(OfferDataException.class);
+		thrown.expectMessage("Offer Start or End Dates can not be past dates.");
+		
+		CreateOfferRequest  createOfferRequest
+		 = new CreateOfferRequest();
+		createOfferRequest.setMerchantName("MERCHANT_1");
+		createOfferRequest.setOfferCurrency("INR");
+		createOfferRequest.setOfferDescription("Cash Back Offer");
+		createOfferRequest.setOfferStartDate(LocalDate.now().minusDays(5));
+		createOfferRequest.setOfferEndDate(LocalDate.now().minusDays(10));
+		createOfferRequest.setOfferType("Cash_Back");
+		createOfferRequest.setOfferAmount(BigDecimal.valueOf(100));
+		offerHelper.validateRequest(createOfferRequest);
+	}
+	
+	/**
 	 * From Date After to Date / To Date Before from Date
 	 * 
 	 * Throw OfferDataException
 	 */
 	
 	@Test
-	public void testCreateOfferEntity_from_date_after_to_date() throws OfferDataException {
+	public void testValidateRequest_from_date_after_to_date() throws OfferDataException {
 		
 		thrown.expect(OfferDataException.class);
 		thrown.expectMessage("Offer Start Date is After Offer End Date.");
@@ -154,7 +177,7 @@ public class OfferHelperTest {
 	
 
 	@Test
-	public void testCreateOfferEntity_descount_off_curr_not_GBP() throws OfferDataException {
+	public void testValidateRequest_descount_off_curr_not_GBP() throws OfferDataException {
 		
 		thrown.expect(OfferDataException.class);
 		thrown.expectMessage("For Discount Offer Currency Must be GBP.");
@@ -178,7 +201,7 @@ public class OfferHelperTest {
 	 */
 	
 	@Test
-	public void testCreateOfferEntity_descount_off_curr_GBP_amount_issue() throws OfferDataException {
+	public void testValidateRequest_descount_off_curr_GBP_amount_issue() throws OfferDataException {
 		
 		thrown.expect(OfferDataException.class);
 		thrown.expectMessage("For Discount offers amount must be between 0 and 100");

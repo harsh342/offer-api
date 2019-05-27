@@ -41,7 +41,11 @@ public class OfferController {
 	@Autowired
 	private OfferDao offerDao;
 
-	@ApiOperation(value = "API to create offers for Merchants", notes = "Valid Merchants are Merchant_1 to Merchant_9")
+	@ApiOperation(value = "API to create offers for Merchants", 
+			notes = "Valid Merchants are Merchant_1 to Merchant_9 \n"
+					+ "Valid Offer Types are CASH_BACK, DISCOUNT, POINTS \n"
+					+ "Valid Offer Currencies are GBP, POINTS \n"
+					+ "Offer Dates must be in yyyy-mm-dd format")
 	@RequestMapping(path = "/offer/create", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<CreateOfferResponse> creatOffer(
 			@Valid @RequestBody CreateOfferRequest createOfferRequest) {
@@ -122,8 +126,8 @@ public class OfferController {
 		}catch(NoOfferDataFoundException e) {
 			responseStatus = new ResponseStatus();
 			responseStatus.setResponseMessage(e.getMessage());
-			responseStatus.setErrorCode("400");
-			responseEntity  = new ResponseEntity<>(responseStatus,HttpStatus.BAD_REQUEST);
+			responseStatus.setErrorCode("404");
+			responseEntity  = new ResponseEntity<>(responseStatus,HttpStatus.NOT_FOUND);
 			logger.debug("NO_UPDATE_RECORD_FOUND="+offerid, e);
 		}catch(OfferDataException e) {
 			responseStatus = new ResponseStatus();

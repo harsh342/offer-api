@@ -270,7 +270,7 @@ public class OfferControllerTest {
 
 		ResponseEntity<ResponseStatus> response = offerController.deleteOffer(1);
 
-		Assert.assertThat(response.getBody().getErrorCode(), is("400"));
+		Assert.assertThat(response.getBody().getErrorCode(), is("404"));
 		Assert.assertThat(response.getBody().getResponseMessage(), is("No Record found for OFFER_ID"));
 	}
 
