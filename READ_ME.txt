@@ -7,6 +7,7 @@ Assumptions
 4. Percentage offer type can not have Offer Amount greater than 100 or less than 0.
 5. For Offer type DISCOUNT currency should be GBP only.
 6. In Create Offer API all the input fields are validated by JSON validator.
+7. Added Fail safe plug in to run regression test case (Integration test case) after build is done.
 
 Application Access Details
 
